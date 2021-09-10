@@ -1,0 +1,33 @@
+controller
+-frontend -> PageController
+-backend
+
+views(frontend, backend)
+-frontend -> layouts folder ->app.blade.php
+          -> home.blade.php
+
+
+admin_user => name, email, password, phone, ip, user_agent
+
+MultiAuth
+-create admin-user guard
+-create AdminLoginController -> showLoginForm(), guard, login() method
+-create admin_login.blade.php
+
+-create ADMINPANEL in RouteServiceProvider.php
+
+create admin_web.php -> RouteServiceProvider -> create Route
+
+Datatable
+jquery datatable(for client side)
+- connect javascript and css cdn in blade file
+- <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
+
+laravel datatable(for server side)
+- install laravel datatable package
+- create route and function for ajax
+- AdminUser::query() (query -> better performance)
