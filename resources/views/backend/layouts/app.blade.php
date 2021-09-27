@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>@yield('title')</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>@yield('title')</title>
     
     <link href="{{ asset('backend/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
@@ -105,6 +108,17 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    $(document).ready(function () {
+        let token = document.head.querySelector('meta[name="csrf-token"]');
+        if(token) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF_TOKEN' : token.content
+                }
+            });
+        }
+    });
+    
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -117,10 +131,17 @@
         }
     })
 
-    @if (Session('message')) {
+    @if (Session('create')) {
         Toast.fire({
             icon: 'success',
-            title: "{{ Session('message') }}"
+            title: "{{ Session('create') }}"
+        })
+        @endif
+
+        @if (Session('update')) {
+        Toast.fire({
+            icon: 'success',
+            title: "{{ Session('update') }}"
         })
         @endif
     }

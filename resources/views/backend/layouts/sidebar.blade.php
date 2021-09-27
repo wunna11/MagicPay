@@ -14,6 +14,12 @@
                     Admin User
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.user.index') }}" class="{{ request()->path() === "admin/user" ? 'mm-active' : '' }}">
+                    <i class="metismenu-icon pe-7s-users"></i>
+                    User
+                </a>
+            </li>
         </ul>
     </div>
 </div>

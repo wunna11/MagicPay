@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Backend;
 
 use Carbon\Carbon;
-use App\Models\AdminUser;
+use App\Models\User;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\StoreAdminUser;
-use App\Http\Requests\UpdateAdminUser;
+use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 
-class AdminUserController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,13 +21,13 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        $users = AdminUser::all();
-        return view('backend.admin_user.index', compact('users'));
+        $users = User::all();
+        return view('backend.user.index', compact('users'));
     }
 
     public function ssd()
     {
-        $data = AdminUser::query();
+        $data = User::query();
         return Datatables::of($data)
             ->editColumn('user_agent', function ($each) {
                 if ($each->user_agent) {
@@ -67,7 +67,7 @@ class AdminUserController extends Controller
             })
 
             ->addColumn('action', function ($each) {
-                $edit_icon = '<a href="' . route('admin.admin-user.edit', $each->id) . '" class="text-info"><i class="fas fa-user-edit"></i></a>';
+                $edit_icon = '<a href="' . route('admin.user.edit', $each->id) . '" class="text-info"><i class="fas fa-user-edit"></i></a>';
                 $delete_icon = '<a href="#" class="text-danger delete" data-id="' . $each->id . '"><i class="fas fa-user-minus"></i></a>';
 
                 // $delete_icon = '<a href="' . route('admin.admin-user.destroy', $each->id) . '" class="text-danger delete"><i class="fas fa-user-minus"></i></a>';
@@ -85,7 +85,7 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        return view('backend.admin_user.create');
+        return view('backend.user.create');
     }
 
     /**
@@ -94,15 +94,15 @@ class AdminUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAdminUser $request)
+    public function store(StoreUser $request)
     {
-        $data = new AdminUser();
+        $data = new User();
         $data->name = request('name');
         $data->email = request('email');
         $data->phone = request('phone');
         $data->password = Hash::make(request('password'));
         $data->save();
-        return redirect()->route('admin.admin-user.index')->with('create', 'Successfully created!');
+        return redirect()->route('admin.user.index')->with('create', 'Successfully created!');
     }
 
     /**
@@ -124,8 +124,8 @@ class AdminUserController extends Controller
      */
     public function edit($id)
     {
-        $admin_user = AdminUser::findOrFail($id);
-        return view('backend.admin_user.edit', compact('admin_user'));
+        $user = User::findOrFail($id);
+        return view('backend.user.edit', compact('user'));
     }
 
     /**
@@ -135,15 +135,15 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAdminUser $request, $id)
+    public function update(UpdateUser $request, $id)
     {
-        $data = AdminUser::findOrFail($id);
+        $data = User::findOrFail($id);
         $data->name = request('name');
         $data->email = request('email');
         $data->phone = request('phone');
         $data->password = request('password') ? Hash::make(request('password')) : $data->password;
         $data->update();
-        return redirect()->route('admin.admin-user.index')->with('update', 'Successfully updated!');
+        return redirect()->route('admin.user.index')->with('update', 'Successfully updated!');
     }
 
     /**
@@ -154,7 +154,7 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        $data = AdminUser::findOrFail($id);
+        $data = User::findOrFail($id);
         $data->delete();
         return 'success';
     }

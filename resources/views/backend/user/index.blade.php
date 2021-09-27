@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Admin Users')
+@section('title', 'Users')
 
 @section('content')
 <div class="app-page-title">
@@ -9,13 +9,13 @@
                 <i class="pe-7s-users icon-gradient bg-mean-fruit">
                 </i>
             </div>
-            <div>Admin User</div>
+            <div>User</div>
         </div>
     </div>
 </div>
 
 <div class="mb-3">
-    <a href="{{ route('admin.admin-user.create') }}" type="button" class="btn btn-primary">Create Admin User</a>
+    <a href="{{ route('admin.user.create') }}" type="button" class="btn btn-primary">Create User</a>
 </div>
 
 <div class="contnet py-3">
@@ -48,7 +48,7 @@
         var table = $('.example').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "admin/admin-user/datatable/ssd",
+            ajax: "admin/user/datatable/ssd",
             columns: [
                 {
                     data: 'id',
@@ -101,23 +101,19 @@
             
             Swal.fire({
               title: 'Are you sure to delete?',
-              text: "You won't be able to revert this!",
-              icon: 'warning',
               showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
               confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
               if (result.isConfirmed) {
                 $.ajax({
-                    url: '/admin/admin-user/' + id,
+                    url: '/admin/user/' + id,
                     type: 'DELETE',
                     success: function() {
                         table.ajax.reload();
                     }
                 });
               }
-            });
+            })
         });
     } );
 </script>

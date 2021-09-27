@@ -31,3 +31,7 @@ laravel datatable(for server side)
 - install laravel datatable package
 - create route and function for ajax
 - AdminUser::query() (query -> better performance)
+
+
+Validation
+request -> php artisan make:request UpdateAdminUser

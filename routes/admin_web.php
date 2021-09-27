@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Backend\AdminUserController;
 use App\Http\Controllers\Backend\PageController;
+use App\Http\Controllers\Backend\UserController;
 use App\Models\AdminUser;
+use App\Models\User;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 
@@ -26,8 +28,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin_user')->group(fun
 
     Route::resources([
         'admin-user' => AdminUserController::class,
+        'user' => UserController::class,
     ]);
 
     // for ajax 
     Route::get('admin/admin-user/datatable/ssd', [AdminUserController::class, 'ssd']);
+    Route::get('admin/user/datatable/ssd', [UserController::class, 'ssd']);
 });
