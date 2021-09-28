@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
+use App\Models\Wallet;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -96,13 +98,32 @@ class UserController extends Controller
      */
     public function store(StoreUser $request)
     {
-        $data = new User();
-        $data->name = request('name');
-        $data->email = request('email');
-        $data->phone = request('phone');
-        $data->password = Hash::make(request('password'));
-        $data->save();
-        return redirect()->route('admin.user.index')->with('create', 'Successfully created!');
+        DB::beginTransaction();
+        try {
+            $data = new User();
+            $data->name = request('name');
+            $data->email = request('email');
+            $data->phone = request('phone');
+            $data->password = Hash::make(request('password'));
+            $data->save();
+
+            Wallet::firstOrCreate(
+                [
+                    'user_id' =>  $data->id,
+                ],
+                [
+                    'account_number' => 12374809,
+                    'amount' => 0,
+                ]
+            );
+
+            DB::commit();
+
+            return redirect()->route('admin.user.index')->with('create', 'Successfully created!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['fail' => 'Something went wrong!'])->withInput();
+        }
     }
 
     /**

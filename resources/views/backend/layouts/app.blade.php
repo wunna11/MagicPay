@@ -136,15 +136,15 @@
             icon: 'success',
             title: "{{ Session('create') }}"
         })
-        @endif
+    @endif
 
-        @if (Session('update')) {
-        Toast.fire({
-            icon: 'success',
-            title: "{{ Session('update') }}"
-        })
-        @endif
-    }
+    @if (Session('update')) {
+    Toast.fire({
+        icon: 'success',
+        title: "{{ Session('update') }}"
+    })
+    @endif
+    
 </script>
 
 @yield('scripts')

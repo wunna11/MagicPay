@@ -30,6 +30,7 @@
                       <th scope="col">Phone</th>
                       <th scope="col">IP</th>
                       <th scope="col">User Agent</th>
+                      <th scope="col">Login At</th>
                       <th scope="col">Created At</th>
                       <th scope="col">Updated At</th>
                       <th scope="col" class="no-sort">Actions</th>
@@ -73,6 +74,10 @@
                 {
                     data: 'user_agent',
                     name: 'user_agent'
+                },
+                {
+                    data: 'login_at',
+                    name: 'login_at'
                 },
                 {
                     data: 'created_at',
