@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\UUIDGenerate;
 use Carbon\Carbon;
 use App\Models\User;
 use Jenssegers\Agent\Agent;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
 use App\Models\Wallet;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -112,7 +114,7 @@ class UserController extends Controller
                     'user_id' =>  $data->id,
                 ],
                 [
-                    'account_number' => 12374809,
+                    'account_number' => UUIDGenerate::account_number(),
                     'amount' => 0,
                 ]
             );
@@ -122,7 +124,7 @@ class UserController extends Controller
             return redirect()->route('admin.user.index')->with('create', 'Successfully created!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['fail' => 'Something went wrong!'])->withInput();
+            return back()->withErrors(['fail' => 'Something went wrong!' . $e->getMessage()])->withInput();
         }
     }
 
@@ -158,13 +160,32 @@ class UserController extends Controller
      */
     public function update(UpdateUser $request, $id)
     {
-        $data = User::findOrFail($id);
-        $data->name = request('name');
-        $data->email = request('email');
-        $data->phone = request('phone');
-        $data->password = request('password') ? Hash::make(request('password')) : $data->password;
-        $data->update();
-        return redirect()->route('admin.user.index')->with('update', 'Successfully updated!');
+        DB::beginTransaction();
+        try {
+            $data = User::findOrFail($id);
+            $data->name = request('name');
+            $data->email = request('email');
+            $data->phone = request('phone');
+            $data->password = request('password') ? Hash::make(request('password')) : $data->password;
+            $data->update();
+
+            Wallet::firstOrCreate(
+                [
+                    'user_id' =>  $data->id,
+                ],
+                [
+                    'account_number' => UUIDGenerate::account_number(),
+                    'amount' => 0,
+                ]
+            );
+
+            DB::commit();
+
+            return redirect()->route('admin.user.index')->with('update', 'Successfully updated!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['fail' => 'Something went wrong!' . $e->getMessage()])->withInput();
+        }
     }
 
     /**

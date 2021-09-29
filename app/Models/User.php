@@ -45,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function wallets()
+    {
+        return $this->hasOne(Wallet::class, 'user_id', 'id');
+    }
 }

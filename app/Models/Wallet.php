@@ -14,4 +14,9 @@ class Wallet extends Model
         'account_number',
         'amount',
     ];
+
+    function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

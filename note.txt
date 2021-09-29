@@ -35,3 +35,6 @@ laravel datatable(for server side)
 
 Validation
 request -> php artisan make:request UpdateAdminUser
+
+Helpers->UUIDGenerate.php
+account number to generate function

@@ -20,6 +20,12 @@
                     User
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.wallet.index') }}" class="{{ request()->path() === "admin/wallet" ? 'mm-active' : '' }}">
+                    <i class="metismenu-icon pe-7s-wallet"></i>
+                    User
+                </a>
+            </li>
         </ul>
     </div>
 </div>

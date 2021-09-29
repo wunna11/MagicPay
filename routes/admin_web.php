@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminUserController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\WalletController;
 use App\Models\AdminUser;
 use App\Models\User;
 use Faker\Guesser\Name;
@@ -31,7 +32,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin_user')->group(fun
         'user' => UserController::class,
     ]);
 
+    // Wallet
+    Route::get('wallet', [WalletController::class, 'index'])->name('wallet.index');
+
     // for ajax 
     Route::get('admin/admin-user/datatable/ssd', [AdminUserController::class, 'ssd']);
     Route::get('admin/user/datatable/ssd', [UserController::class, 'ssd']);
+    Route::get('admin/wallet/datatable/ssd', [WalletController::class, 'ssd']);
 });
