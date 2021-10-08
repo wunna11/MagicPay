@@ -18,14 +18,16 @@ use App\Http\Controllers\Frontend\PageController;
 */
 
 
-Auth::routes();
-Route::get('/', [PageController::class, 'home']);
-
 // admin
 Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);
 Route::post('admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
 Route::post('admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 
-Route::get('admin', function () {
-    return ('Admin Home Page');
+
+// User Auth
+Auth::routes();
+
+Route::middleware('auth')->namespace('Frontend')->group(function () {
+    Route::get('/', [PageController::class, 'home'])->name('home');
+    Route::get('/profile', [PageController::class, 'index'])->name('profile');
 });

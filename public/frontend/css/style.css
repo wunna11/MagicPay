@@ -1,0 +1,100 @@
+/* Body */
+
+body {
+    background: whitesmoke;
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Header Menu */
+
+.header-menu {
+    background: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header-menu i {
+    font-size: 20px;
+}
+
+.header-menu h3 {
+    font-size: 25px;
+    margin-bottom: 0;
+}
+
+.header-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.header-menu a:hover {
+    color: blue;
+    transition: 0.3s;
+}
+
+.header-menu p:hover {
+    color: blue;
+    transition: 0.3s;
+}
+
+/* Bottom Menu */
+.bottom-menu {
+    background: white;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.bottom-menu i {
+    margin-top: 10px;
+}
+
+.bottom-menu p {
+    margin-bottom: 10px;
+}
+
+.bottom-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.bottom-menu a:hover {
+    color: blue;
+    transition: 0.3s;
+}
+
+.bottom-menu p:hover {
+    color: blue;
+    transition: 0.3s;
+}
+
+/* Main Content */
+.content {
+    margin-top: 20px;
+    margin-bottom: 70px;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+/* Account */
+.account .profile {
+    text-align: center;
+}
+
+.account .profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+.account .card {
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.09);
+}
