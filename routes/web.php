@@ -30,4 +30,6 @@ Auth::routes();
 Route::middleware('auth')->namespace('Frontend')->group(function () {
     Route::get('/', [PageController::class, 'home'])->name('home');
     Route::get('/profile', [PageController::class, 'index'])->name('profile');
+    Route::get('/update-password', [PageController::class, 'updatePassword'])->name('update-password');
+    Route::post('/update-password', [PageController::class, 'updatePasswordStore'])->name('update-password.store');
 });

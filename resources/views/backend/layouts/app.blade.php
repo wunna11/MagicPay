@@ -116,36 +116,35 @@
                     'X-CSRF_TOKEN' : token.content
                 }
             });
-        }
-    });
-    
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
+        };
 
-    @if (Session('create')) {
-        Toast.fire({
-            icon: 'success',
-            title: "{{ Session('create') }}"
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
         })
-    @endif
 
-    @if (Session('update')) {
-    Toast.fire({
-        icon: 'success',
-        title: "{{ Session('update') }}"
-    })
-    @endif
-    
-</script>
+        @if (Session('create')) 
+            Toast.fire({
+                icon: 'success',
+                title: "{{ Session('create') }}"
+            });
+        @endif
+
+        @if (Session('update')) 
+            Toast.fire({
+                icon: 'success',
+                title: "{{ Session('update') }}"
+            });
+        @endif
+    });
+    </script>
 
 @yield('scripts')
 

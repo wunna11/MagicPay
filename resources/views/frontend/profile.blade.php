@@ -29,14 +29,18 @@
 
     <div class="card mt-3">
         <div class="card-body pr-0">
-            <div class="d-flex justify-content-between">
-                <span class="mr-3">Update Password</span>
-                <span class="mr-3"><i class="fas fa-angle-right"></i></span>
+            <div>
+                <a href="{{ route('update-password') }}" class="d-flex justify-content-between">
+                    <span class="mr-3">Update Password</span>
+                    <span class="mr-3"><i class="fas fa-angle-right"></i></span>
+                </a>
             </div>
             <hr>
-            <div class="d-flex justify-content-between logout">
-                <span class="mr-3">Logout</span>
-                <span class="mr-3"><i class="fas fa-angle-right"></i></span>
+            <div class="logout">
+                <a href="" class="d-flex justify-content-between">
+                    <span class="mr-3">Logout</span>
+                    <span class="mr-3"><i class="fas fa-angle-right"></i></span>
+                </a>
             </div>
         </div>
     </div>
@@ -56,7 +60,8 @@
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Confirm'
+              confirmButtonText: 'Confirm',
+              reverseButtons: true,
             }).then((result) => {
               if (result.isConfirmed) {
                 $.ajax({

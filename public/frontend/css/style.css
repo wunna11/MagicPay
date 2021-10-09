@@ -1,8 +1,14 @@
 /* Body */
 
 body {
-    background: whitesmoke;
+    background: #ededf5;
     font-family: "Open Sans", sans-serif;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.09);
+    border: none;
 }
 
 /* Header Menu */
@@ -97,4 +103,21 @@ body {
 .account .card {
     border-radius: 10px;
     box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.09);
+    border: none;
+}
+
+.account .logout {
+    cursor: pointer;
+}
+
+.account a:hover {
+    text-decoration: #ededf5;
+}
+
+a {
+    color: #212529;
+}
+
+.update-password img {
+    width: 350px;
 }
