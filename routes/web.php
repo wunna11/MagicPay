@@ -29,7 +29,19 @@ Auth::routes();
 
 Route::middleware('auth')->namespace('Frontend')->group(function () {
     Route::get('/', [PageController::class, 'home'])->name('home');
+
+    // Profile
     Route::get('/profile', [PageController::class, 'index'])->name('profile');
     Route::get('/update-password', [PageController::class, 'updatePassword'])->name('update-password');
     Route::post('/update-password', [PageController::class, 'updatePasswordStore'])->name('update-password.store');
+
+    // Wallet
+    Route::get('/wallet', [PageController::class, 'wallet'])->name('wallet');
+
+    // Transfer
+    Route::get('/transfer', [PageController::class, 'transfer'])->name('transfer');
+    Route::post('/transfer/confirm', [PageController::class, 'transferConfirm'])->name('transfer_confirm');
+
+    // to account verfiy for ajax
+    Route::get('/to-account-verify', [PageController::class, 'toAccountVerify']);
 });

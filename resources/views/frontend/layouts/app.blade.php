@@ -31,15 +31,20 @@
 <body>
     <div id="app">
         <div class="header-menu">
-            <div class="row justify-content-center">
+            <div class="d-flex justify-content-center">
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-4 text-center">
+                        <div class="col-2 text-center">
+                            @if (request()->path() !== "/")
+                                <a href="#" class="back-btn">
+                                    <i class="fas fa-angle-left"></i>
+                                </a>
+                            @endif
                         </div>
-                        <div class="col-4 text-center">
+                        <div class="col-8 text-center">
                             <h3>@yield('title')</h3>
                         </div>
-                        <div class="col-4 text-center">
+                        <div class="col-2 text-center">
                             <a href="">
                                 <i class="fas fa-bells"></i>
                             </a>
@@ -51,7 +56,7 @@
 
         
         <div class="content">
-            <div class="row justify-content-center">
+            <div class="d-flex justify-content-center">
                 <div class="col-md-8">
                     @yield('content')
                 </div>
@@ -59,25 +64,36 @@
         </div>
 
         <div class="bottom-menu">
-            <div class="row justify-content-center">
+            <a href="" class="scan-tab">
+                <div class="inside">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+            </a>
+            <div class="d-flex justify-content-center">
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-4 text-center">
-                            <a href="">
+                        <div class="col-3 text-center">
+                            <a href="{{ route('home') }}">
                                 <i class="fas fa-home"></i>
                                 <p>Home</p>
                             </a>
                         </div>
-                        <div class="col-4 text-center">
-                            <a href="">
-                                <i class="fas fa-qrcode"></i>
-                                <p>Scan</p>
+                        <div class="col-3 text-center">
+                            <a href="{{ route('wallet') }}">
+                                <i class="fas fa-wallet"></i>
+                                <p>Wallet</p>
                             </a>
                         </div>
-                        <div class="col-4 text-center">
+                        <div class="col-3 text-center">
+                            <a href="">
+                                <i class="fas fa-exchange-alt"></i>
+                                <p>Transaction</p>
+                            </a>
+                        </div>
+                        <div class="col-3 text-center">
                             <a href="{{ route('profile') }}">
                                 <i class="fas fa-user"></i>
-                                <p>Account</p>
+                                <p>Profile</p>
                             </a>
                         </div>
                     </div>
@@ -132,6 +148,13 @@
                     title: "{{ Session('update') }}"
                 });
             @endif
+
+            $('.back-btn').on('click', function(e) {
+                e.preventDefault();
+                window.history.go(-1);
+                return false;
+            })
+
         });
     </script>
     

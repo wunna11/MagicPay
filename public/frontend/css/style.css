@@ -20,11 +20,11 @@ body {
 }
 
 .header-menu i {
-    font-size: 20px;
+    font-size: 23px;
 }
 
 .header-menu h3 {
-    font-size: 25px;
+    font-size: 23px;
     margin-bottom: 0;
 }
 
@@ -50,10 +50,12 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    font-size: 13px;
 }
 
 .bottom-menu i {
     margin-top: 10px;
+    font-size: 18px;
 }
 
 .bottom-menu p {
@@ -63,6 +65,7 @@ body {
 .bottom-menu a {
     text-decoration: none;
     color: black;
+    display: block;
 }
 
 .bottom-menu a:hover {
@@ -86,18 +89,22 @@ body {
     margin-left: 0px;
 }
 
-/* Account */
-.account .profile {
+/* Profile */
+.profile {
     text-align: center;
 }
 
-.account .profile img {
+.profile img {
     width: 100px;
     height: 100px;
     border-radius: 100%;
     padding: 5px;
     border: 1px solid #ddd;
     background: #fff;
+}
+
+/* Account */
+.account {
 }
 
 .account .card {
@@ -120,4 +127,107 @@ a {
 
 .update-password img {
     width: 350px;
+}
+
+/* Scan tab */
+.scan-tab {
+    width: 60px;
+    height: 60px;
+    background: #ededf9;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.scan-tab .inside {
+    width: 52px;
+    height: 52px;
+    background: #fff;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: glow 3s infinite;
+}
+
+.scan-tab .inside i {
+    margin: 0;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 -10px #5842e3;
+    }
+    40% {
+        box-shadow: 0 0 20px #5842e3;
+    }
+    60% {
+        box-shadow: 0 0 20px #5842e3;
+    }
+    100% {
+        box-shadow: 0 0 -10px #5842e3;
+    }
+}
+
+/* Wallet */
+.wallet {
+}
+
+.wallet .my-card {
+    background: #5842e3;
+    color: #fff;
+}
+
+.wallet .my-card span {
+    text-transform: uppercase;
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 7px;
+}
+
+.wallet .my-card h4 {
+    font-size: 22px;
+}
+
+.wallet .my-card h5 {
+    font-size: 20px;
+}
+
+/* Scan */
+.shortcut-box img {
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+}
+
+.function-box img {
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+}
+
+.function-box a {
+    text-decoration: none;
+}
+
+.function-box a:hover {
+    color: blue;
+    transition: 0.3s;
+}
+
+.function-box p:hover {
+    color: blue;
+    transition: 0.3s;
+}
+
+/* Transfer */
+.transfer p {
+    margin-top: 0;
+    margin-bottom: 0rem;
 }
