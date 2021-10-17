@@ -41,7 +41,13 @@ Route::middleware('auth')->namespace('Frontend')->group(function () {
     // Transfer
     Route::get('/transfer', [PageController::class, 'transfer'])->name('transfer');
     Route::post('/transfer/confirm', [PageController::class, 'transferConfirm'])->name('transfer_confirm');
+    Route::post('/transfer/complete', [PageController::class, 'transferComplete'])->name('transfer_complete');
+
+    // Transaction
+    Route::get('/transaction', [PageController::class, 'transaction'])->name('transaction');
+
 
     // to account verfiy for ajax
     Route::get('/to-account-verify', [PageController::class, 'toAccountVerify']);
+    Route::get('/password-check', [PageController::class, 'passwordCheck']);
 });
