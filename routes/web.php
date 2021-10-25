@@ -45,6 +45,7 @@ Route::middleware('auth')->namespace('Frontend')->group(function () {
 
     // Transaction
     Route::get('/transaction', [PageController::class, 'transaction'])->name('transaction');
+    Route::get('transaction/{trx_id}', [PageController::class, 'transactionDetail'])->name('transaction_detail');
 
 
     // to account verfiy for ajax

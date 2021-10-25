@@ -33,7 +33,7 @@ class UUIDGenerate
     {
         $number = mt_rand(1000000000000000, 9999999999999999);
 
-        if (Wallet::where('trx_id', $number)->exists()) {
+        if (Transaction::where('trx_id', $number)->exists()) {
             self::trxId();
         }
 

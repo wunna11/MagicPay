@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Helpers\UUIDGenerate;
 use App\Models\User;
+use Hashids\Hashids;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Helpers\UUIDGenerate;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdatePassword;
 use App\Http\Requests\TransferFormValidate;
-use App\Models\Transaction;
 
 class PageController extends Controller
 {
@@ -132,7 +133,7 @@ class PageController extends Controller
             $ref_no = UUIDGenerate::refNumber();
             $from_account_transaction = new Transaction();
             $from_account_transaction->ref_no = $ref_no;
-            $from_account_transaction->trx_id = UUIDGenerate::refNumber();
+            $from_account_transaction->trx_id = UUIDGenerate::trxId();
             $from_account_transaction->user_id = $from_account->id;
             $from_account_transaction->type = 2;
             $from_account_transaction->amount = $amount;
@@ -142,7 +143,7 @@ class PageController extends Controller
 
             $to_account_transaction = new Transaction();
             $to_account_transaction->ref_no = $ref_no;
-            $to_account_transaction->trx_id = UUIDGenerate::refNumber();
+            $to_account_transaction->trx_id = UUIDGenerate::trxId();
             $to_account_transaction->user_id = $to_account->id;
             $to_account_transaction->type = 1;
             $to_account_transaction->amount = $amount;
@@ -151,7 +152,7 @@ class PageController extends Controller
             $to_account_transaction->save();
 
             DB::commit();
-            return redirect('/')->with('transfer_success', 'Successfully transfered');
+            return redirect()->route('transaction_detail', $from_account_transaction->trx_id)->with('transfer_success', 'Successfully transfered!');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors($e->getMessage())->withInput();
@@ -159,12 +160,30 @@ class PageController extends Controller
     }
 
     // Transaction
-    public function transaction()
+    public function transaction(Request $request)
     {
         $authUser = Auth::guard('web')->user();
         // eagerloading -> with('users', 'soucrce') => database relationship user and transaction
-        $transactions = Transaction::with('user', 'source')->where('user_id', $authUser->id)->orderBy('created_at', 'DESC')->paginate(5);
+        $transactions = Transaction::with('user', 'source')->where('user_id', $authUser->id)->orderBy('created_at', 'DESC');
+
+        if ($request->type) {
+            $transactions = $transactions->where('type', $request->type);
+        }
+
+        if ($request->date) {
+            $transactions = $transactions->whereDate('created_at', $request->date);
+        }
+
+        $transactions = $transactions->paginate(3);
         return view('frontend.transaction', compact('transactions'));
+    }
+
+    public function transactionDetail($trx_id)
+    {
+        $authUser = Auth::guard('web')->user();
+        $transaction = Transaction::with('user', 'source')->where('user_id', $authUser->id)->where('trx_id', $trx_id)->first();
+        // $transaction = Transaction::findOrFail($trx_id);
+        return view('frontend.transaction_detail', compact('transaction'));
     }
 
     public function toAccountVerify(Request $request)

@@ -126,7 +126,7 @@ a {
 }
 
 .update-password img {
-    width: 350px;
+    width: 250px;
 }
 
 /* Scan tab */
@@ -230,4 +230,17 @@ a {
 .transfer p {
     margin-top: 0;
     margin-bottom: 0rem;
+}
+
+/* Transaction */
+.transaction a {
+    text-decoration: none;
+}
+
+.transaction a:hover {
+    color: blue;
+}
+
+.transaction-detail img {
+    width: 80px;
 }
