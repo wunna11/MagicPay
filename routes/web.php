@@ -47,6 +47,9 @@ Route::middleware('auth')->namespace('Frontend')->group(function () {
     Route::get('/transaction', [PageController::class, 'transaction'])->name('transaction');
     Route::get('transaction/{trx_id}', [PageController::class, 'transactionDetail'])->name('transaction_detail');
 
+    // QR code
+    Route::get('/qr-code', [PageController::class, 'receiveQR'])->name('receiveQR');
+    Route::get('/scan-and-pay', [PageController::class, 'scanAndPay'])->name('scanAndPay');
 
     // to account verfiy for ajax
     Route::get('/to-account-verify', [PageController::class, 'toAccountVerify']);

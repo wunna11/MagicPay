@@ -12,7 +12,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdatePassword;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TransferFormValidate;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PageController extends Controller
 {
@@ -66,6 +68,11 @@ class PageController extends Controller
 
     public function transferConfirm(TransferFormValidate $request)
     {
+        $authUser = Auth::guard('web')->user();
+        $from_account = $authUser;
+        $to_phone = request('to_phone');
+        $amount = request('amount');
+        $description = request('description');
 
         if ($request->amount < 1000) {
             return back()->withErrors(['amount' => 'The amount must be at least 1000MMK.'])->withInput();
@@ -83,11 +90,15 @@ class PageController extends Controller
             return back()->withErrors(['to_phone' => 'Phone number is invalid!'])->withInput();
         }
 
-        $authUser = Auth::guard('web')->user();
-        $from_account = $authUser;
-        $to_phone = request('to_phone');
-        $amount = request('amount');
-        $description = request('description');
+        // my amount is greater than request->amount
+        if (!$from_account->wallet || !$to_account->wallet) {
+            return back()->withErrors(['transfer_message' => 'Something went wrong!'])->withInput();
+        }
+
+        if ($from_account->wallet->amount < $amount) {
+            return back()->withErrors(['amount' => 'The amount is insufficient.'])->withInput();
+        }
+
         return view('frontend.transfer_confirm', compact('from_account', 'to_account', 'to_phone', 'amount', 'description'));
     }
 
@@ -118,6 +129,10 @@ class PageController extends Controller
 
         if (!$from_account->wallet || !$to_account->wallet) {
             return back()->withErrors(['transfer_message' => 'Something went wrong!'])->withInput();
+        }
+
+        if ($from_account->wallet->amount < $amount) {
+            return back()->withErrors(['amount' => 'The amount is insufficient.'])->withInput();
         }
 
         DB::beginTransaction();
@@ -224,5 +239,16 @@ class PageController extends Controller
             'status' => 'fail',
             'message' => 'Your password is incorrect!',
         ]);
+    }
+
+    public function receiveQR()
+    {
+        $authUser = auth()->guard('web')->user();
+        return view('frontend.receive_qr', compact('authUser'));
+    }
+
+    public function scanAndPay()
+    {
+        return view('frontend.scan_and_pay');
     }
 }

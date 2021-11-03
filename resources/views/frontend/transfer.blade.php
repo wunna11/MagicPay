@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label for="">To <span class="text-success to_account_info"></span></label>
                     <div class="input-group mb-3">
-                        <input type="text" name="to_phone" vlaue="{{ old('to_phone') }}" class="form-control to_phone">
+                        <input type="text" name="to_phone" value="{{ old('to_phone') }}" class="form-control to_phone">
                         <span class="input-group-text btn btn-primary verify-btn" id="basic-addon2"><i class="fas fa-check-circle"></i></span>
                     </div>
                     @error('to_phone')
