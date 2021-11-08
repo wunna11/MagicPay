@@ -50,6 +50,9 @@ Route::middleware('auth')->namespace('Frontend')->group(function () {
     // QR code
     Route::get('/qr-code', [PageController::class, 'receiveQR'])->name('receiveQR');
     Route::get('/scan-and-pay', [PageController::class, 'scanAndPay'])->name('scanAndPay');
+    Route::get('/scan-and-pay-form', [PageController::class, 'scanAndPayForm'])->name('scanAndPayForm');
+    Route::post('/scan-and-pay/confirm', [PageController::class, 'scanAndPayConfirm'])->name('scanAndPayConfirm');
+    Route::post('/scan-and-pay/complete', [PageController::class, 'scanAndPayComplete'])->name('scanAndPayComplete');
 
     // to account verfiy for ajax
     Route::get('/to-account-verify', [PageController::class, 'toAccountVerify']);

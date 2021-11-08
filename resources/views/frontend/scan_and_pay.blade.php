@@ -26,7 +26,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <video id="scanner"></video>
+                  <video id="scanner" width="400px" height="400px"></video>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -44,9 +44,16 @@
 <script src="{{ asset('frontend/js/qr-scanner.umd.min.js') }}"></script>
 <script>
     $(document).ready(function() {
+
       var videoElem = document.getElementById('scanner');
       const qrScanner = new QrScanner(videoElem, function(result) {
-        console.log(result);
+        if(result) {
+          qrScanner.stop();
+          $('#scanModal').modal('hide');
+
+          var to_phone = result;
+          window.location.replace(`scan-and-pay-form?to_phone=${to_phone}`);
+        }
       });
 
       $('#scanModal').on('shown.bs.modal', function (event) {
@@ -56,6 +63,7 @@
       $('#scanModal').on('hidden.bs.modal', function (event) {
         qrScanner.stop();
       });
+
     });
 </script>
 @endsection
