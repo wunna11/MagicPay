@@ -45,7 +45,7 @@
                             <h3>@yield('title')</h3>
                         </div>
                         <div class="col-2 text-center">
-                            <a href="">
+                            <a href="{{ route('noti.index') }}">
                                 <i class="fas fa-bells"></i>
                             </a>
                         </div>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="bottom-menu">
-            <a href="" class="scan-tab">
+            <a href="{{ route('scanAndPay') }}" class="scan-tab">
                 <div class="inside">
                     <i class="fas fa-qrcode"></i>
                 </div>
@@ -110,6 +110,9 @@
     {{-- Sweet Alert2 --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- <script src="{{ asset('frontend/js/jquery.jscroll.min.js') }}"></script> --}}
+
+    {{-- JS scroll --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>

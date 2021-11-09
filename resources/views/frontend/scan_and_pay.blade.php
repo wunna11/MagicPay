@@ -4,6 +4,9 @@
 
 @section('content')
 <div class="scan-and-pay">
+  @error('fail')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
     <div class="card my-card">
         <div class="card-body text-center">
             <div class="text-center">

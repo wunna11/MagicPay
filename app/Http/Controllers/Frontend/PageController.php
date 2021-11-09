@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\User;
 use Hashids\Hashids;
 use App\Models\Transaction;
+use Laravel\Ui\Presets\Vue;
 use Illuminate\Http\Request;
 use App\Helpers\UUIDGenerate;
 use Illuminate\Support\Facades\DB;
@@ -13,15 +14,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdatePassword;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\GeneralNotification;
 use App\Http\Requests\TransferFormValidate;
-use Laravel\Ui\Presets\Vue;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Notification;
 
 class PageController extends Controller
 {
     public function home()
     {
         $user = Auth::guard('web')->user();
+
         return view('frontend.home', compact('user'));
     }
 
@@ -46,6 +49,14 @@ class PageController extends Controller
             // The passwords match...
             $user->password = Hash::make($new_password);
             $user->update();
+
+            $title = 'Changed Password!';
+            $message = 'Your password is successfully updated cufcnfwcjk.';
+            $sourceable_id = $user->id;
+            $sourceable_type = User::class;
+            $web_link = route('profile');
+
+            Notification::send([$user], new GeneralNotification($title, $message, $sourceable_id, $sourceable_type, $web_link));
 
             return redirect()->route('profile')->with('update', 'Successfully password updated!');
         }
@@ -259,7 +270,7 @@ class PageController extends Controller
 
         $to_account = User::where('phone', request('to_phone'))->first();
         if (!$to_account) {
-            return back()->withErrors(['fail', 'QR is invalid!']);
+            return back()->withErrors(['fail' => 'QR is invalid!']);
         }
 
         return view('frontend.scan_and_pay_form', compact('from_account', 'to_account'));

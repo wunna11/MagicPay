@@ -46,6 +46,11 @@ class LoginController extends Controller
         return Auth::guard();
     }
 
+    public function username()
+    {
+        return 'phone';
+    }
+
     protected function authenticated(Request $request, $user)
     {
         $user->ip = $request->ip();

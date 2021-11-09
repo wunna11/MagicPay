@@ -30,6 +30,7 @@
     </div>
 
     <h6 class="mt-2">Tansactions</h6>
+    <div class="scrolling-pagination">
         @foreach ($transactions as $transaction)
         <a href="{{ route('transaction_detail', $transaction->trx_id) }}">
         
@@ -61,25 +62,25 @@
         @endforeach
 
         {{ $transactions->links() }}
+    </div>
 </div>
 
 @endsection
 
 @section('scripts')
-<script>
-        // $('ul.pagination').hide();
-        // $(function() {
-        //     $('.infinite-scroll').jscroll({
-        //         autoTrigger: true,
-        //         loadingHtml: '',
-        //         padding: 0,
-        //         nextSelector: '.pagination li.active + li a',
-        //         contentSelector: 'div.infinite-scroll',
-        //         callback: function() {
-        //             $('ul.pagination').remove();
-        //         }
-        //     });
-        // });
+<script type="text/javascript">
+        $('ul.pagination').hide();
+        $(function() {
+            $('.scrolling-pagination').jscroll({
+                autoTrigger: true,
+                padding: 0,
+                nextSelector: '.pagination li.active + li a',
+                contentSelector: 'div.scrolling-pagination',
+                callback: function() {
+                    $('ul.pagination').remove();
+                }
+            });
+        });
 
         $('.date').daterangepicker({
             "singleDatePicker": true,

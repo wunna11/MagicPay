@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Frontend\NotificationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PageController;
@@ -57,4 +58,8 @@ Route::middleware('auth')->namespace('Frontend')->group(function () {
     // to account verfiy for ajax
     Route::get('/to-account-verify', [PageController::class, 'toAccountVerify']);
     Route::get('/password-check', [PageController::class, 'passwordCheck']);
+
+    //Notification
+    Route::get('/notification', [NotificationController::class, 'index'])->name('noti.index');
+    Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('noti.show');
 });
