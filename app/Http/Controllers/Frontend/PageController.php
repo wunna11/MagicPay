@@ -178,6 +178,24 @@ class PageController extends Controller
             $to_account_transaction->description = $description;
             $to_account_transaction->save();
 
+            // From noti
+            $title = 'Transfer money!';
+            $message = 'Your wallet transfered ' . number_format($amount, 2) . ' MMK to ' . $to_account->name . ' (' . $to_account->phone . ').';
+            $sourceable_id = $from_account->id;
+            $sourceable_type = Transaction::class;
+            $web_link = route('transaction_detail', $from_account_transaction->trx_id);
+
+            Notification::send([$from_account], new GeneralNotification($title, $message, $sourceable_id, $sourceable_type, $web_link));
+
+            // To noti
+            $title = 'Received money!';
+            $message = 'Your wallet received ' . number_format($amount, 2) . ' MMK from ' . $from_account->name . ' (' . $from_account->phone . ').';
+            $sourceable_id = $to_account->id;
+            $sourceable_type = Transaction::class;
+            $web_link = route('transaction_detail', $to_account_transaction->trx_id);
+
+            Notification::send([$to_account], new GeneralNotification($title, $message, $sourceable_id, $sourceable_type, $web_link));
+
             DB::commit();
             return redirect()->route('transaction_detail', $from_account_transaction->trx_id)->with('transfer_success', 'Successfully transfered!');
         } catch (\Exception $e) {
@@ -375,6 +393,24 @@ class PageController extends Controller
             $to_account_transaction->source_id = $from_account->id;
             $to_account_transaction->description = $description;
             $to_account_transaction->save();
+
+            // From noti
+            $title = 'Transfer money!';
+            $message = 'Your wallet transfered ' . number_format($amount, 2) . ' MMK to ' . $to_account->name . ' (' . $to_account->phone . ').';
+            $sourceable_id = $from_account->id;
+            $sourceable_type = Transaction::class;
+            $web_link = route('transaction_detail', $from_account_transaction->trx_id);
+
+            Notification::send([$from_account], new GeneralNotification($title, $message, $sourceable_id, $sourceable_type, $web_link));
+
+            // To noti
+            $title = 'Received money!';
+            $message = 'Your wallet received ' . number_format($amount, 2) . ' MMK from ' . $from_account->name . ' (' . $from_account->phone . ').';
+            $sourceable_id = $to_account->id;
+            $sourceable_type = Transaction::class;
+            $web_link = route('transaction_detail', $to_account_transaction->trx_id);
+
+            Notification::send([$to_account], new GeneralNotification($title, $message, $sourceable_id, $sourceable_type, $web_link));
 
             DB::commit();
             return redirect()->route('transaction_detail', $from_account_transaction->trx_id)->with('transfer_success', 'Successfully transfered!');

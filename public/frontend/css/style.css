@@ -244,3 +244,10 @@ a {
 .transaction-detail img {
     width: 80px;
 }
+
+.unread_noti_count {
+    position: absolute;
+    top: -8px;
+    right: -2px;
+    padding: 3px;
+}

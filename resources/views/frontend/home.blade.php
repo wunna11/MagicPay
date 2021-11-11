@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="profile">
-                <img src="https://ui-avatars.com/api/?name=wunna" alt="">
+                <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" alt="">
                 <h5 class="mt-3">{{ $user->name }}</h5>
                 <p class="text-muted">{{ $user->wallet ? number_format($user->wallet->amount) : '-'}} <span>MMK</span></p>
             </div>

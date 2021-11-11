@@ -47,6 +47,7 @@
                         <div class="col-2 text-center">
                             <a href="{{ route('noti.index') }}">
                                 <i class="fas fa-bells"></i>
+                                <span class="badge badge-pill badge-danger unread_noti_count">{{ $unread_noti_count }}</span>
                             </a>
                         </div>
                     </div>

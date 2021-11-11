@@ -5,7 +5,7 @@
 @section('content')
 <div class="account">
     <div class="profile">
-        <img src="https://ui-avatars.com/api/?name=wunna" alt="">
+        <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" alt="">
     </div>
 
     <div class="card mt-3">
