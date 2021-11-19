@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Wallet;
 use Illuminate\Http\Request;
+use App\Helpers\UUIDGenerate;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +59,16 @@ class LoginController extends Controller
         $user->user_agent = $request->server('HTTP_USER_AGENT');
         $user->login_at = date('Y-m-d H:i:s');
         $user->update();
+
+        Wallet::firstOrCreate(
+            [
+                'user_id' =>  $user->id,
+            ],
+            [
+                'account_number' => UUIDGenerate::account_number(),
+                'amount' => 0,
+            ]
+        );
 
         return redirect($this->redirectTo);
     }

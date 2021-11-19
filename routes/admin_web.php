@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\Backend\AdminUserController;
+use App\Models\User;
+use Faker\Guesser\Name;
+use App\Models\AdminUser;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\WalletController;
-use App\Models\AdminUser;
-use App\Models\User;
-use Faker\Guesser\Name;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\AdminUserController;
+use App\Http\Controllers\Auth\AdminRegisterController;
 
 
 
@@ -31,6 +32,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin_user')->group(fun
         'admin-user' => AdminUserController::class,
         'user' => UserController::class,
     ]);
+
 
     // Wallet
     Route::get('wallet', [WalletController::class, 'index'])->name('wallet.index');

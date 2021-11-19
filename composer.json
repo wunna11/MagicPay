@@ -10,6 +10,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^8.54",
+        "laravel/passport": "^10.2",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
@@ -32,6 +33,9 @@
             "Database\\Seeders\\": "database/seeders/"
         }
     },
+    "files": [
+       
+    ],
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

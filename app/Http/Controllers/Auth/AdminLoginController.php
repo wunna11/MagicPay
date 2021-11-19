@@ -58,6 +58,7 @@ class AdminLoginController extends Controller
      * @param  mixed  $user
      * @return mixed
      */
+
     protected function authenticated(Request $request, $user)
     {
         $user->ip = $request->ip();
