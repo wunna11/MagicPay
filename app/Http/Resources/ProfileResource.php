@@ -14,12 +14,16 @@ class ProfileResource extends JsonResource
      */
     public function toArray($request)
     {
+        $unread_noti_count = $this->unreadNotifications()->count();
+
         return [
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
             'account_number' => $this->wallet ? $this->wallet->account_number : '',
             'balance' => $this->wallet ? number_format($this->wallet->amount) . ' MMK' : '',
+            'hash_value' => $this->phone,
+            'unread_noti_count' => $unread_noti_count,
         ];
     }
 }

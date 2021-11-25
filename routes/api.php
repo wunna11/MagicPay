@@ -28,5 +28,16 @@ Route::namespace('Api')->group(function () {
     Route::middleware('auth:api')->group(function () {
         Route::get('/profile', [PageController::class, 'profile']);
         Route::post('/profile/logout', [AuthController::class, 'logout']);
+
+        Route::get('/transaction', [PageController::class, 'transaction']);
+        Route::get('/transaction/{trx_id}', [PageController::class, 'transactionDetail']);
+
+        Route::get('/notification', [PageController::class, 'notification']);
+        Route::get('/notification/{id}', [PageController::class, 'notificationDetail']);
+
+        Route::get('/to-account-verify', [PageController::class, 'toAccountVerify']);
+
+        Route::get('/transfer/confirm', [PageController::class, 'transferConfirm']);
+        Route::post('/transfer/complete', [PageController::class, 'transferComplete']);
     });
 });

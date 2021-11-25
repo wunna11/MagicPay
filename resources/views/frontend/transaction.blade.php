@@ -11,7 +11,7 @@
                 <h6 class="mb-2">Filter</h6>
                     <div class="input-group my-2">
                         <label class="input-group-text" for="inputGroupSelect01">Date</label>
-                        <input type="text" class="form-control date" value="{{ request('date') }}">
+                        <input type="text" class="form-control date" value="{{ request('date') }}" placeholder="All">
                     </div>
                </div>
 
@@ -84,13 +84,25 @@
 
         $('.date').daterangepicker({
             "singleDatePicker": true,
-            "autoApply": true,
+            "autoApply": false,
+            "autoUpdateInput": false,
             "locale": {
                 "format": "YYYY-MM-DD",
             },
         });
 
         $('.date').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+
+            var date = $('.date').val();
+            var type = $('.type').val();
+            history.pushState(null, '', `?date=${date}&type=${type}`);
+            window.location.reload();
+        });
+
+        $('.date').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+            
             var date = $('.date').val();
             var type = $('.type').val();
             history.pushState(null, '', `?date=${date}&type=${type}`);
