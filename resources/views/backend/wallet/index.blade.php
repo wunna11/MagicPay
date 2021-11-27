@@ -14,6 +14,10 @@
     </div>
 </div>
 
+<div class="mb-3">
+    <a href="{{ route('admin.wallet.addAmount') }}" type="button" class="btn btn-primary">Add Amount</a>
+    <a href="{{ route('admin.wallet.reduceAmount') }}" type="button" class="btn btn-danger">Reduce Amount</a>
+</div>
 
 <div class="contnet py-3">
     <div class="card">

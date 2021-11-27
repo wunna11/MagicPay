@@ -9,8 +9,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\WalletController;
 use App\Http\Controllers\Backend\AdminUserController;
 use App\Http\Controllers\Auth\AdminRegisterController;
-
-
+use App\Models\Wallet;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +40,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin_user')->group(fun
     Route::get('admin/admin-user/datatable/ssd', [AdminUserController::class, 'ssd']);
     Route::get('admin/user/datatable/ssd', [UserController::class, 'ssd']);
     Route::get('admin/wallet/datatable/ssd', [WalletController::class, 'ssd']);
+
+    Route::get('/wallet/add-amount', [WalletController::class, 'addAmount'])->name('wallet.addAmount');
+    Route::post('/wallet/add-amount/store', [WalletController::class, 'addAmountStore'])->name('wallet.addAmountStore');
+
+    Route::get('/wallet/reduce-amount', [WalletController::class, 'reduceAmount'])->name('wallet.reduceAmount');
+    Route::post('/wallet/reduce-amount/store', [WalletController::class, 'reduceAmountStore'])->name('wallet.reduceAmountStore');
 });
