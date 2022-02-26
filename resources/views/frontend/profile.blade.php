@@ -65,7 +65,9 @@
             }).then((result) => {
               if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ route('logout') }}",
+                    // url: "{{ route('logout') }}",
+                    // type: 'POST',
+                    url: "{{ url('logout') }}",
                     type: 'GET',
                     success: function() {
                         window.location.replace("{{ route('profile') }}")

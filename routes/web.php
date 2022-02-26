@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\NotificationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::post('admin/logout', [AdminLoginController::class, 'logout'])->name('admi
 
 // User Auth
 Auth::routes();
+Route::get('logout', [LoginController::class, 'logout']);
 
 Route::middleware('auth')->namespace('Frontend')->group(function () {
     Route::get('/', [PageController::class, 'home'])->name('home');
