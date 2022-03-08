@@ -51,6 +51,7 @@ class AdminLoginController extends Controller
         return view('auth.admin_login');
     }
 
+
     /**
      * The user has been authenticated.
      *

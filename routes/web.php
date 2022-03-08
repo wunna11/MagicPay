@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\AdminRegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\NotificationController;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,8 @@ use App\Http\Controllers\Frontend\PageController;
 Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);
 Route::post('admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
 Route::post('admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+Route::get('admin/register', [AdminRegisterController::class, 'showRegisterForm'])->name('admin.register');
+Route::post('admin/post-register', [AdminRegisterController::class, 'register'])->name('admin.post-register');
 
 
 // User Auth
