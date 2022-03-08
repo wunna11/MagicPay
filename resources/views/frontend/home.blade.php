@@ -46,7 +46,7 @@
                     </div>
                     <hr>
                     <div class="function-box">
-                        <a href="" class="d-flex justify-content-between">
+                        <a href="{{ route('wallet')}}" class="d-flex justify-content-between">
                             <span class="mr-3"><img src="{{asset('images/wallet.png')}}" alt="">Wallet</span>
                             <span class="mr-3"><i class="fas fa-angle-right"></i></span>
                         </a>

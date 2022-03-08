@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::namespace('Api')->group(function () {
+    Route::get('/tst', [PageController::class, 'index']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 

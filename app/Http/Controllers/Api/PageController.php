@@ -23,6 +23,12 @@ use App\Http\Resources\NotificationDetailResource;
 
 class PageController extends Controller
 {
+    public function index() 
+    {
+        return 'testing';
+    }
+
+
     public function profile()
     {
         $user = auth()->user();
