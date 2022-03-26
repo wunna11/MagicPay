@@ -17,6 +17,7 @@
 <div class="mb-3">
     <a href="{{ route('admin.wallet.addAmount') }}" type="button" class="btn btn-primary">Add Amount</a>
     <a href="{{ route('admin.wallet.reduceAmount') }}" type="button" class="btn btn-danger">Reduce Amount</a>
+    <a href="{{ route('admin.walletpdf.download')}} " type="button" class="btn btn-success">PDF Download</a>
 </div>
 
 <div class="contnet py-3">

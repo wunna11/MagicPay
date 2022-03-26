@@ -12,6 +12,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Exception;
+use PDF;
 
 class WalletController extends Controller
 {
@@ -132,4 +133,12 @@ class WalletController extends Controller
             return back()->withErrors($e->getMessage())->withInput();
         }
     }
+
+     // PDF Download
+     public function generate_pdf()
+     {
+         $wallets = Wallet::all();
+         $pdf = PDF::loadView('backend.pdf.wallet-list', compact('wallets'));
+         return $pdf->download('wallet-list.pdf');
+     }
 }

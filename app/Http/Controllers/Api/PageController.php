@@ -25,7 +25,8 @@ class PageController extends Controller
 {
     public function index() 
     {
-        return 'testing';
+        $res = new Response('success', 'testing');
+        return $res->success();
     }
 
 

@@ -164,6 +164,8 @@ return [
 
         Yajra\Datatables\DatatablesServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -234,6 +236,7 @@ return [
 
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
 
     ],
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreAdminUser;
 use App\Http\Requests\UpdateAdminUser;
+use PDF;
 
 class AdminUserController extends Controller
 {
@@ -157,5 +158,13 @@ class AdminUserController extends Controller
         $data = AdminUser::findOrFail($id);
         $data->delete();
         return 'success';
+    }
+
+    // PDF Download
+    public function generate_pdf()
+    {
+        $admin_users = AdminUser::all();
+        $pdf = PDF::loadView('backend.pdf.admin-user-list', compact('admin_users'));
+        return $pdf->download('admin-user-list.pdf');
     }
 }

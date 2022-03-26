@@ -16,20 +16,22 @@
     
     <link href="{{ asset('backend/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
-</head>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap4.min.css">
+
+    {{-- button --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 
     {{-- Select 2 js --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 
-
-    
-
     @yield('extra_css')
+
+</head>
     
-    <body>
+<body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         {{-- Header --}}
         @include('backend.layouts.header')        
@@ -107,11 +109,20 @@
     </div>
 <script type="text/javascript" src="{{ asset('backend/js/main.js') }}"></script>
 
+{{-- Datatable --}}
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap4.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{{-- button --}}
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
 
 {{-- Sweet Alert2 --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

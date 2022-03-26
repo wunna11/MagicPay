@@ -16,9 +16,10 @@
 
 <div class="mb-3">
     <a href="{{ route('admin.admin-user.create') }}" type="button" class="btn btn-primary">Create Admin User</a>
+    <a href="{{ route('admin.pdf.download') }}" target="_blank" type="button" class="btn btn-success">PDF Download</a>
 </div>
 
-<div class="contnet py-3">
+<div class="content py-3">
     <div class="card">
         <div class="card-body">
             <table class="table table-striped table-bordered table-hover example">

@@ -18,7 +18,7 @@
     <a href="{{ route('admin.user.create') }}" type="button" class="btn btn-primary">Create User</a>
 </div>
 
-<div class="contnet py-3">
+<div class="content py-3">
     <div class="card">
         <div class="card-body">
             <table class="table table-striped table-bordered table-hover example">
@@ -36,7 +36,7 @@
                       <th scope="col" class="no-sort">Actions</th>
                     </tr>
                   </thead>
-                  <tbody></tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -45,8 +45,97 @@
 
 @section('scripts')
 <script>
+
     $(document).ready(function() {
         var table = $('.example').DataTable({
+            dom: 'Bfrtip',
+            lengthMenu: [
+                [ 10, 25, 50, -1 ],
+                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+            ],
+            buttons: [
+                'pageLength',
+                {
+                    text: "<span>Refresh Tab</span>",
+                    action: function (e, dt, node, config) {
+                        dt.ajax.reload(null, false);
+                    }
+                },
+                {
+                  extend: 'pdfHtml5',
+                  text: 'PDF',
+                  orientation: 'portrait',
+                  pageSize: 'A4',
+                  title: 'User List',
+                  exportOptions: {
+                      columns: [0, 1, 2, 3, 4, 5]
+                  },
+                  customize: function (doc) {
+                                          //Remove the title created by datatTables
+                                          doc.content.splice(0,1);
+                                          var now = new Date();
+                                          var jsDate = now.getDate()+'-'+(now.getMonth()+1)+'-'+now.getFullYear();
+                                          var datetime = "Last Sync: " + now.getDate() + "/"
+                                                        + (now.getMonth()+1)  + "/" 
+                                                        + now.getFullYear() + " @ "  
+                                                        + now.getHours() + ":"  
+                                                        + now.getMinutes() + ":" 
+                                                        + now.getSeconds();
+                                          doc.pageMargins = [20,60,20,30];
+                                          doc.defaultStyle.fontSize = 8;
+                                          doc.styles.tableHeader.fontSize = 8;
+                                          doc.styles.tableBodyEven.alignment = 'center',
+                                          doc.styles.tableBodyOdd.alignment = 'center',
+ 
+                                          doc['header']=(function() {
+                                              return {
+                                                  columns: [
+ 
+                                                      {
+                                                          alignment: 'left',
+                                                          italics: true,
+                                                          text: 'User List Table',
+                                                          fontSize: 18,
+                                                          margin: [10,0]
+                                                      },
+                                                      {
+                                                          alignment: 'right',
+                                                          fontSize: 10,
+                                                          text: 'Report Time ' + datetime
+                                                      }
+                                                  ],
+                                                  margin: [20, 20, 20, 0]
+                                              }
+                                          });
+ 
+                                          doc['footer']=(function(page, pages) {
+                                              return {
+                                                  columns: [
+                                                      {
+                                                          alignment: 'left',
+                                                          text: ''
+                                                      },
+                                                      {
+                                                          alignment: 'right',
+                                                          text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }]
+                                                      }
+                                                  ],
+                                                  margin: [20, 0, 20, 10]
+                                              }
+                                          });
+ 
+                                          var objLayout = {};
+                                          objLayout['hLineWidth'] = function(i) { return .5; };
+                                          objLayout['vLineWidth'] = function(i) { return .5; };
+                                          objLayout['hLineColor'] = function(i) { return '#aaa'; };
+                                          objLayout['vLineColor'] = function(i) { return '#aaa'; };
+                                          objLayout['paddingLeft'] = function(i) { return 4; };
+                                          objLayout['paddingRight'] = function(i) { return 4; };
+                                          doc.content[0].layout = objLayout;
+                                          doc.content[0].table.widths = '16.66667%';
+                                  }
+                }
+            ],  
             processing: true,
             serverSide: true,
             ajax: "admin/user/datatable/ssd",
@@ -118,7 +207,7 @@
                     }
                 });
               }
-            })
+            });
         });
     } );
 </script>
