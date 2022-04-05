@@ -48,6 +48,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin_user')->group(fun
     Route::post('/wallet/reduce-amount/store', [WalletController::class, 'reduceAmountStore'])->name('wallet.reduceAmountStore');
 
     // PDF Download
-    Route::get('/pdf-download', [AdminUserController::class, 'generate_pdf'])->name('pdf.download');
+    Route::get('/admin-users/pdf-download', [AdminUserController::class, 'generate_pdf'])->name('pdf.download');
     Route::get('/pdf-download', [WalletController::class, 'generate_pdf'])->name('walletpdf.download');
 });
