@@ -12,5 +12,5 @@
             <div>Admin Dashboard</div>
         </div>
     </div>
-</div>   
+</div>  
 @endsection

@@ -164,7 +164,7 @@ return [
 
         Yajra\Datatables\DatatablesServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
-        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+        // Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
 
 
         /*
